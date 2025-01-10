@@ -24,6 +24,7 @@ class CompanyController extends AbstractController
     }
     
     #[Route('/company/add', name: 'add_company')]
+    #[Route('/company/edit/{id}', name: 'edit_company')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $company = new Company();
