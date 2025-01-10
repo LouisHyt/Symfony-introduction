@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add a new employee{% endblock %}
+
+{% block body %}
+    <h1>Add a new employee</h1>
+    <div class="p-5">
+        {{ form_start(addEmployeeForm) }}
+            <div class="row">
+                <div class="col-sm">
+                    {{ form_row(addEmployeeForm.firstname) }}
+                </div>
+                <div class="col-sm">
+                    {{ form_row(addEmployeeForm.lastname) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    {{ form_row(addEmployeeForm.birthdate) }}
+                </div>
+                <div class="col-sm">
+                    {{ form_row(addEmployeeForm.hireDate) }}
+                </div>
+            </div>
+            {{ form_row(addEmployeeForm.city) }}
+            {{ form_row(addEmployeeForm.company) }}
+            <div class="mt-4">
+                {{ form_row(addEmployeeForm.create) }}
+            </div>
+        {{ form_end(addEmployeeForm) }}
+    </div>
+{% endblock %}

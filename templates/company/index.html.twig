@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Company List{% endblock %}
+
+{% block body %}
+
+<div class="d-flex p-4 flex-column gap-3">
+    <h1>Company List</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Adress</th>
+            <th scope="col">City</th>
+            <th scope="col">Postal Code</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for company in companies %}
+                <tr>
+                    <th>{{company.id}}</th>
+                    <td>
+                        <a href={{path('show_company', {'id': company.id})}}>
+                            {{company.name}}
+                        </a>
+                    </td>
+                    <td>{{company.adress}}</td>
+                    <td>{{company.city}}</td>
+                    <td>{{company.postalCode}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+    tbody > tr:hover {
+        cursor: pointer;
+    }
+</style>
+
+{% endblock %}

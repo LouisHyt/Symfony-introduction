@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add a new company{% endblock %}
+
+{% block body %}
+    <h1>Add a new company</h1>
+    <div class="p-5">
+        {{ form_start(addCompanyForm) }}
+        {{ form_row(addCompanyForm.name) }}
+        {{ form_row(addCompanyForm.creationDate) }}
+        <div class="row">
+            <div class="col-sm">
+                {{ form_row(addCompanyForm.adress) }}
+            </div>
+            <div class="col-sm">
+                {{ form_row(addCompanyForm.postalCode) }}
+            </div>
+            <div class="col-sm">
+                {{ form_row(addCompanyForm.city) }}
+            </div>
+        </div>
+        <div class="mt-4">
+            {{ form_end(addCompanyForm) }}
+        </div>
+    </div>
+{% endblock %}

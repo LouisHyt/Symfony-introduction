@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Company Details{% endblock %}
+
+{% block body %}
+
+<div class="d-flex p-4 flex-column gap-3">
+    <h1>Company Details</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Adress</th>
+            <th scope="col">City</th>
+            <th scope="col">Postal Code</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>{{company.id}}</th>
+                <td>{{company.name}}</td>
+                <td>{{company.adress}}</td>
+                <td>{{company.city}}</td>
+                <td>{{company.postalCode}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="employees">
+        <h2>Employees</h2>
+        {% if company.employees | length > 0 %} 
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Fullname</th>
+                        <th scope="col">birtdate</th>
+                        <th scope="col">Hire Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for employee in company.employees %}
+                        <tr>
+                            <td>{{employee.id}}</td>
+                            <td>
+                                <a href={{path('show_employee', {'id': employee.id})}}>
+                                    {{employee.firstname ~ ' ' ~ employee.lastname}}
+                                </a>
+                            </td>
+                            <td>{{employee.birthdate|date("d/m/Y")}}</td>
+                            <td>{{employee.hireDate|date("d/m/Y")}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No employees for this company</p>        
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
