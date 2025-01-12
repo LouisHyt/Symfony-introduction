@@ -41,7 +41,7 @@ class CompanyType extends AbstractType
                     "class" => "form-control"
                 ]
             ])
-            ->add('create', SubmitType::class, [
+            ->add('confirm', SubmitType::class, [
                 "attr" => [
                     "class" => "btn btn-primary"
                 ]

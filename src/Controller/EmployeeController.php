@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class EmployeeController extends AbstractController
 {
+
     #[Route('/employee', name: 'app_employee')]
     public function index(EmployeeRepository $employeeRepository): Response
     {
@@ -24,11 +25,14 @@ class EmployeeController extends AbstractController
         ]);
     }
 
-    #[Route('/employee/add', name: 'add_employee')]
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $employee = new Employee();
 
+    #[Route('/employee/add', name: 'add_employee')]
+    #[Route('/employee/edit/{id}', name: 'edit_employee')]
+    public function create_edit(Employee $employee = null, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        if(!$employee){
+            $employee = new Employee();
+        }
         
         $form = $this->createForm(EmployeeType::class, $employee);
         
@@ -39,12 +43,21 @@ class EmployeeController extends AbstractController
             $entityManager->persist($employee);
             //execute
             $entityManager->flush();
-            return $this->redirectToRoute("app_company");
+            return $this->redirectToRoute("app_employee");
         }
         
         return $this->render('employee/add.html.twig', [
-            'addEmployeeForm' => $form
+            'addEmployeeForm' => $form,
+            'edit' => $employee->getId()
         ]);
+    }
+
+    #[Route('/employee/{id}/delete}', name: 'delete_employee')]
+    public function delete(Employee $employee, EntityManagerInterface $entityManager) : Response
+    {
+        $entityManager->remove($employee);
+        $entityManager->flush();
+        return $this->redirectToRoute("app_employee");
     }
 
     #[Route('/employee/{id}', name: 'show_employee')]
@@ -54,4 +67,5 @@ class EmployeeController extends AbstractController
             'employee' => $employee
         ]);
     }
+
 }

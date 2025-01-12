@@ -15,6 +15,7 @@
             <th scope="col">Adress</th>
             <th scope="col">City</th>
             <th scope="col">Postal Code</th>
+            <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +30,10 @@
                     <td>{{company.adress}}</td>
                     <td>{{company.city}}</td>
                     <td>{{company.postalCode}}</td>
+                    <td class="d-flex gap-3">
+                        <a class="btn btn-warning" href={{path('edit_company', {'id': company.id})}}>Edit</a>
+                        <a class="btn btn-danger" href={{path('delete_company', {'id': company.id})}}>Delete</a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

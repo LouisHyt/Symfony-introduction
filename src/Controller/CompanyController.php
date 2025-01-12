@@ -23,12 +23,16 @@ class CompanyController extends AbstractController
         ]);
     }
     
+
     #[Route('/company/add', name: 'add_company')]
     #[Route('/company/edit/{id}', name: 'edit_company')]
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    public function create_edit(Company $company = null, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $company = new Company();
-        
+
+        if(!$company){
+            $company = new Company();
+        }
+
         $form = $this->createForm(CompanyType::class, $company);
         
         $form->handleRequest($request);
@@ -42,10 +46,21 @@ class CompanyController extends AbstractController
         }
 
         return $this->render('company/add.html.twig', [
-            'addCompanyForm' => $form
+            'addCompanyForm' => $form,
+            'edit' => $company->getId()
         ]);
     }
+
+
+    #[Route('/company/{id}/delete', name: 'delete_company')]
+    public function delete(Company $company, EntityManagerInterface $entityManager) : Response
+    {
+        $entityManager->remove($company);
+        $entityManager->flush();
+        return $this->redirectToRoute("app_company");
+    }
     
+
     #[Route('/company/{id}', name: 'show_company')]
     public function show(Company $company): Response
     {

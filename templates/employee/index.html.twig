@@ -22,7 +22,7 @@
                 <th scope="col">Fullname</th>
                 <th scope="col">birtdate</th>
                 <th scope="col">Company</th>
-                <th scope="col">Hire Date</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -36,7 +36,10 @@
                     </td>
                     <td>{{employee.birthdate|date("d/m/Y")}}</td>
                     <td>{{employee.company.name}}</td>
-                    <td>{{employee.hireDate|date("d/m/Y")}}</td>
+                    <td class="d-flex gap-3">
+                        <a class="btn btn-warning" href={{path('edit_employee', {'id': employee.id})}}>Edit</a>
+                        <a class="btn btn-danger" href={{path('delete_employee', {'id': employee.id})}}>Delete</a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

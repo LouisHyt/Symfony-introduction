@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Add a new employee{% endblock %}
+{% set title = edit ? 'Edit an employee' : 'Add a new employee' %}
+
+{% block title %} {{title}} {% endblock %}
 
 {% block body %}
-    <h1>Add a new employee</h1>
+    <h1> {{title}} </h1>
     <div class="p-5">
         {{ form_start(addEmployeeForm) }}
             <div class="row">
@@ -25,7 +27,7 @@
             {{ form_row(addEmployeeForm.city) }}
             {{ form_row(addEmployeeForm.company) }}
             <div class="mt-4">
-                {{ form_row(addEmployeeForm.create) }}
+                {{ form_row(addEmployeeForm.confirm) }}
             </div>
         {{ form_end(addEmployeeForm) }}
     </div>
